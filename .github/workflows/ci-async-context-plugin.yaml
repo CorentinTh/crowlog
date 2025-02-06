@@ -31,10 +31,6 @@ jobs:
       - name: Run linters
         run: pnpm lint
 
-      # Needed as the logger is a dependency of the async context plugin
-      - name: Build logger
-        run: pnpm -F @crowlog/logger build
-
       - name: Type check
         run: pnpm typecheck
 
