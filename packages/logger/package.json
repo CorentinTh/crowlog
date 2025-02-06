@@ -1,0 +1,66 @@
+{
+  "name": "@crowlog/logger",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.15.0",
+  "description": "Crowlog logger.",
+  "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
+  "license": "MIT",
+  "homepage": "https://github.com/CorentinTh/crowlog/tree/main/packages/logger",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CorentinTh/crowlog"
+  },
+  "bugs": {
+    "url": "https://github.com/CorentinTh/crowlog/issues"
+  },
+  "keywords": [
+    "logger",
+    "logging",
+    "typescript",
+    "nodejs",
+    "browser",
+    "edge",
+    "async",
+    "context",
+    "plugin",
+    "transport"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "prepare": "pnpm run build",
+    "build": "unbuild",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "unbuild": "catalog:",
+    "vitest": "catalog:"
+  }
+}
