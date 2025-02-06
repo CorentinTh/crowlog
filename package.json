@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Crowlog root package.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
-  "license": "MIT", 
+  "license": "MIT",
   "packageManager": "pnpm@9.15.4",
   "keywords": [
     "logger",
@@ -12,9 +12,15 @@
     "nodejs",
     "browser",
     "edge",
-    "async",  
+    "async",
     "context",
     "plugin",
     "transport"
-  ]
+  ],
+  "scripts": {
+    "release": "bumpp --recursive --commit --tag --push"
+  },
+  "dependencies": {
+    "bumpp": "^10.0.2"
+  }
 }
