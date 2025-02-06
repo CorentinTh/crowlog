@@ -42,7 +42,6 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "prepare": "pnpm run build",
     "build": "unbuild",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
