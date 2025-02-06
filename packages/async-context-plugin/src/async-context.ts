@@ -1,5 +1,5 @@
-import { AsyncLocalStorage } from 'node:async_hooks';
 import type { LoggerPlugin } from '@crowlog/logger';
+import { AsyncLocalStorage } from 'node:async_hooks';
 
 const asyncLocalStorage = new AsyncLocalStorage<Record<string, unknown>>();
 

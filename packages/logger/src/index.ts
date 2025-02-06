@@ -4,10 +4,10 @@ export {
 
 export type {
   Logger,
+  LoggerPlugin,
   LoggerTransport,
   LoggerTransportLogArgs,
   LogLevel,
-  LoggerPlugin,
 } from './logger.types';
 
 export {

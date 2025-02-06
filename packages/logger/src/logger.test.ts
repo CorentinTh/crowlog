@@ -1,6 +1,6 @@
+import type { LoggerPlugin } from './logger.types';
 import { describe, expect, test } from 'vitest';
 import { applyPluginsTransformLogContext } from './logger';
-import { LoggerPlugin } from './logger.types';
 
 describe('logger', () => {
   describe('applyPluginsTransformLogContext', () => {
