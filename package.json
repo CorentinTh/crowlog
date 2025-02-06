@@ -1,12 +1,20 @@
 {
   "name": "@crowlog/root",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT"
+  "description": "Crowlog root package.",
+  "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
+  "license": "MIT", 
+  "packageManager": "pnpm@9.15.4",
+  "keywords": [
+    "logger",
+    "logging",
+    "typescript",
+    "nodejs",
+    "browser",
+    "edge",
+    "async",  
+    "context",
+    "plugin",
+    "transport"
+  ]
 }
