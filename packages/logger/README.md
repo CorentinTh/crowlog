@@ -17,13 +17,13 @@ Crowlog is a simple, lightweight, zero-dependency, and extendable logging librar
 ## Installation
 
 ```bash
-// pnpm 
+# pnpm 
 pnpm install @crowlog/logger
 
-// npm
+# npm
 npm install @crowlog/logger
 
-// yarn
+# yarn
 yarn add @crowlog/logger
 ```
 
@@ -128,13 +128,13 @@ Permit to easily add context data to the logs, it's useful in http servers to ad
 Install the plugin:
 
 ```bash
-// pnpm
+# pnpm
 pnpm install @crowlog/async-context-plugin
 
-// npm
+# npm
 npm install @crowlog/async-context-plugin
 
-// yarn
+# yarn
 yarn add @crowlog/async-context-plugin
 ```
 
