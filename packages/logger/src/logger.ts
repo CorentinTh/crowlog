@@ -33,10 +33,21 @@ export function createLogger({
     };
   };
 
-  return logLevels.reduce((acc, level) => ({
+  const logMethods = logLevels.reduce((acc, level) => ({
     ...acc,
     [level]: buildLogger({ level }),
   }), {} as Record<LogLevel, (...args: LogMethodArguments) => void>);
+
+  return {
+    ...logMethods,
+    getTransports: () => transports,
+    getPlugins: () => plugins,
+    createChildLogger: createLoggerFactory({
+      transports,
+      plugins,
+      getTimestamp,
+    }),
+  };
 }
 
 export function applyPluginsTransformLogContext({ baseContext, plugins }: { baseContext: LoggerTransportLogArgs; plugins: LoggerPlugin[] }) {
@@ -45,4 +56,25 @@ export function applyPluginsTransformLogContext({ baseContext, plugins }: { base
   }
 
   return plugins.reduce((context, plugin) => plugin.transformLogContext?.({ context }).context ?? context, baseContext);
+}
+
+export function createLoggerFactory(
+  factoryOptions: { transports?: LoggerTransport[]; plugins?: LoggerPlugin[]; getTimestamp?: () => number },
+) {
+  return (instanceOptions: { namespace: string; transports?: LoggerTransport[]; plugins?: LoggerPlugin[]; getTimestamp?: () => number }) => {
+    const options = {
+      namespace: instanceOptions.namespace,
+      getTimestamp: instanceOptions.getTimestamp ?? factoryOptions.getTimestamp,
+      transports: [
+        ...(factoryOptions.transports ?? []),
+        ...(instanceOptions.transports ?? []),
+      ],
+      plugins: [
+        ...(factoryOptions.plugins ?? []),
+        ...(instanceOptions.plugins ?? []),
+      ],
+    };
+
+    return createLogger(options);
+  };
 }
