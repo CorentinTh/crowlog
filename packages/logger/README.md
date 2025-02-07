@@ -47,6 +47,37 @@ logger.error({ error: new Error('...') }, 'Something went wrong');
 > logger.info({ foo: 'bar' }, 'Hello world');
 > ```
 
+### Methods
+
+Crowlog logger provides 4 different logging methods: `debug`, `info`, `warn`, and `error`.
+
+```typescript
+logger.debug(/* ... */);
+logger.info(/* ... */);
+logger.warn(/* ... */);
+logger.error(/* ... */);
+```
+
+### Child logger and factory
+
+Crowlog logger provides a `createChildLogger` method to create a child logger that inherit the configuration of the parent logger.
+
+```typescript
+import { createLogger } from '@crowlog/logger';
+
+const logger = createLogger({ namespace: 'my-app' });
+const childLogger = logger.createChildLogger({ namespace: 'child' });
+```
+
+Alternatively, you can use the `createLoggerFactory` to create a logger factory that can be used to create child loggers with the same configuration.
+
+```typescript
+import { createLoggerFactory } from '@crowlog/logger';
+
+const createLogger = createLoggerFactory({ transports: /* ... */, plugins: /* ... */ });
+const logger = createLogger({ namespace: 'child' });
+```
+
 ## Transports
 
 A transport specifies where the logs are sent to. By default, Crowlog uses the `console` transport. 
