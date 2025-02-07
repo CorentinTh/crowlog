@@ -96,6 +96,40 @@ importers:
         specifier: 'catalog:'
         version: 3.0.5(@types/debug@4.1.12)(@types/node@22.13.1)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.0)
 
+  packages/pretty:
+    dependencies:
+      picocolors:
+        specifier: ^1.1.1
+        version: 1.1.1
+    devDependencies:
+      '@antfu/eslint-config':
+        specifier: 'catalog:'
+        version: 3.16.0(@typescript-eslint/utils@8.23.0(eslint@9.19.0(jiti@2.4.2))(typescript@5.7.3))(@vue/compiler-sfc@3.5.13)(eslint@9.19.0(jiti@2.4.2))(typescript@5.7.3)(vitest@3.0.5(@types/debug@4.1.12)(@types/node@22.13.1)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.0))
+      '@crowlog/logger':
+        specifier: workspace:*
+        version: link:../logger
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.1
+      '@vitest/coverage-v8':
+        specifier: 'catalog:'
+        version: 3.0.5(vitest@3.0.5(@types/debug@4.1.12)(@types/node@22.13.1)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.0))
+      eslint:
+        specifier: 'catalog:'
+        version: 9.19.0(jiti@2.4.2)
+      tsx:
+        specifier: 'catalog:'
+        version: 4.19.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.3.1(typescript@5.7.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 3.0.5(@types/debug@4.1.12)(@types/node@22.13.1)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.0)
+
 packages:
 
   '@ampproject/remapping@2.3.0':

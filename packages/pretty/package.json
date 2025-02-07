@@ -1,0 +1,64 @@
+{
+  "name": "@crowlog/pretty",
+  "type": "module",
+  "version": "1.0.1",
+  "packageManager": "pnpm@9.15.4",
+  "description": "Crowlog pretty logger pipe.",
+  "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
+  "license": "MIT",
+  "homepage": "https://github.com/CorentinTh/crowlog/tree/main/packages/pretty",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CorentinTh/crowlog"
+  },
+  "bugs": {
+    "url": "https://github.com/CorentinTh/crowlog/issues"
+  },
+  "keywords": [
+    "logger",
+    "logging",
+    "typescript",
+    "nodejs",
+    "browser",
+    "edge",
+    "async",
+    "context",
+    "plugin",
+    "transport",
+    "pretty"
+  ],
+  "bin": {
+    "crowlog-pretty": "./bin/crowlog-pretty.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "tsx watch --include 'src/**/*.ts' demo.ts | tsx ./src/cli.ts",
+    "build": "unbuild",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "TZ=UTC vitest run",
+    "test:watch": "TZ=UTC vitest watch",
+    "typecheck": "tsc --noEmit",
+    "prepare": "pnpm run build",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "@crowlog/logger": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "unbuild": "catalog:",
+    "vitest": "catalog:"
+  }
+}
