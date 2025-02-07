@@ -1,5 +1,6 @@
 export {
   createLogger,
+  createLoggerFactory,
 } from './logger';
 
 export type {

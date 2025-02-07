@@ -13,6 +13,7 @@ export function createConsoleLoggerTransport({
   console?: Record<'log' | 'warn' | 'error', (...args: any[]) => void>;
 } = {}): LoggerTransport {
   return {
+    name: 'console',
     log(args) {
       const consoleMethod = consoleMethodMap[args.level];
 

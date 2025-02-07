@@ -11,6 +11,7 @@ export function createInMemoryLoggerTransport(): InMemoryLoggerTransport {
   const logs: LoggerTransportLogArgs[] = [];
 
   return {
+    name: 'in-memory',
     log: (args) => {
       logs.push(args);
     },

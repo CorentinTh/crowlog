@@ -13,6 +13,7 @@ export type LoggerTransportLogArgs = {
 };
 
 export type LoggerTransport = {
+  name: string;
   log: (args: LoggerTransportLogArgs) => void;
 };
 

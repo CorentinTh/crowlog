@@ -4,7 +4,7 @@ import { createConsoleLoggerTransport } from './console.logger-transport';
 
 describe('console logger-transport', () => {
   describe('createConsoleLoggerTransport', () => {
-    test('', () => {
+    test('the transport writes to stdout through the console object', () => {
       const consoleArgs: any[] = [];
 
       const console = {
