@@ -58,21 +58,23 @@ export function applyPluginsTransformLogContext({ baseContext, plugins }: { base
   return plugins.reduce((context, plugin) => plugin.transformLogContext?.({ context }).context ?? context, baseContext);
 }
 
+export function mergeWhenDefined<T>(arr1: T[] | undefined, arr2: T[] | undefined) {
+  if (arr1 === undefined && arr2 === undefined) {
+    return undefined;
+  }
+
+  return [...(arr1 ?? []), ...(arr2 ?? [])];
+}
+
 export function createLoggerFactory(
-  factoryOptions: { transports?: LoggerTransport[]; plugins?: LoggerPlugin[]; getTimestamp?: () => number },
+  factoryOptions: { transports?: LoggerTransport[]; plugins?: LoggerPlugin[]; getTimestamp?: () => number } = {},
 ) {
   return (instanceOptions: { namespace: string; transports?: LoggerTransport[]; plugins?: LoggerPlugin[]; getTimestamp?: () => number }) => {
     const options = {
       namespace: instanceOptions.namespace,
       getTimestamp: instanceOptions.getTimestamp ?? factoryOptions.getTimestamp,
-      transports: [
-        ...(factoryOptions.transports ?? []),
-        ...(instanceOptions.transports ?? []),
-      ],
-      plugins: [
-        ...(factoryOptions.plugins ?? []),
-        ...(instanceOptions.plugins ?? []),
-      ],
+      transports: mergeWhenDefined(factoryOptions.transports, instanceOptions.transports),
+      plugins: mergeWhenDefined(factoryOptions.plugins, instanceOptions.plugins),
     };
 
     return createLogger(options);

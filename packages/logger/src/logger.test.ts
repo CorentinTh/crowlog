@@ -1,6 +1,6 @@
 import type { LoggerPlugin, LoggerTransport } from './logger.types';
 import { describe, expect, test } from 'vitest';
-import { applyPluginsTransformLogContext, createLogger } from './logger';
+import { applyPluginsTransformLogContext, createLogger, createLoggerFactory, mergeWhenDefined } from './logger';
 
 const dummyTransport: LoggerTransport = {
   name: 'dummy',
@@ -133,6 +133,27 @@ describe('logger', () => {
       const extendedContext = applyPluginsTransformLogContext({ baseContext, plugins: [plugin] });
 
       expect(extendedContext).to.deep.equal(baseContext);
+    });
+  });
+
+  describe('createLoggerFactory', () => {
+    test('logger created by the factory still have the console transport is no other transports are provided', () => {
+      const factory = createLoggerFactory();
+
+      const logger = factory({ namespace: 'test' });
+
+      expect(logger.getTransports().map(({ name }) => name)).to.deep.equal(['console']);
+    });
+  });
+
+  describe('mergeWhenDefined', () => {
+    test('concatenates two arrays, but only if both are defined', () => {
+      expect(mergeWhenDefined([1, 2], [3, 4])).to.deep.equal([1, 2, 3, 4]);
+      expect(mergeWhenDefined([1, 2], undefined)).to.deep.equal([1, 2]);
+      expect(mergeWhenDefined(undefined, [3, 4])).to.deep.equal([3, 4]);
+      expect(mergeWhenDefined(undefined, undefined)).to.deep.equal(undefined);
+      expect(mergeWhenDefined(undefined, [])).to.deep.equal([]);
+      expect(mergeWhenDefined([], undefined)).to.deep.equal([]);
     });
   });
 });
