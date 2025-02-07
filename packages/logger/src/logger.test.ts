@@ -33,7 +33,7 @@ describe('logger', () => {
       test('the default transport is the console transport', () => {
         const logger = createLogger({ namespace: 'test' });
 
-        expect(logger.getTransports().map(({ name }) => name)).to.deep.equal(['console']);
+        expect(logger.getTransports().map(({ name }) => name)).to.deep.equal(['stdout']);
       });
     });
 
@@ -142,7 +142,7 @@ describe('logger', () => {
 
       const logger = factory({ namespace: 'test' });
 
-      expect(logger.getTransports().map(({ name }) => name)).to.deep.equal(['console']);
+      expect(logger.getTransports().map(({ name }) => name)).to.deep.equal(['stdout']);
     });
   });
 

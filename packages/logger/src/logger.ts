@@ -1,10 +1,10 @@
 import type { LoggerPlugin, LoggerTransport, LoggerTransportLogArgs, LogLevel, LogMethodArguments } from './logger.types';
 import { logLevels } from './logger.constants';
-import { createConsoleLoggerTransport } from './transports/console/console.logger-transport';
+import { createStdoutLoggerTransport } from './transports/stdout/stdout.logger-transport';
 
 export function createLogger({
   namespace,
-  transports = [createConsoleLoggerTransport()],
+  transports = [createStdoutLoggerTransport()],
   plugins = [],
   getTimestamp = () => Date.now(),
 }: {

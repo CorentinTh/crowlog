@@ -80,20 +80,40 @@ const logger = createLogger({ namespace: 'child' });
 
 ## Transports
 
-A transport specifies where the logs are sent to. By default, Crowlog uses the `console` transport. 
+A transport specifies where the logs are sent to. By default, Crowlog uses the `stdout` transport. 
 
-### Console transport
+### Stdout transport
 
-The console transport use the standard `console` to log the messages to stdout.
+The stdout transport writes the logs to the standard output stream. It's the default transport.
 
 ```typescript
-import { createLogger, createConsoleLoggerTransport } from '@crowlog/logger';
+import { createLogger, createStdoutLoggerTransport } from '@crowlog/logger';
 
 const logger = createLogger({ namespace: 'my-app' });
 // equivalent to
-const logger = createLogger({ namespace: 'my-app', transports: [createConsoleLoggerTransport()] });
+const logger = createLogger({ namespace: 'my-app', transports: [createStdoutLoggerTransport()] });
 
 logger.info('Hello world');
+```
+
+By default, the stdout transport serializes the log args to a JSON string and use the `console.log` function to write the logs to the standard output stream for cross-compatibility with most environments.
+
+You can customize the serialization and the write function by providing a custom `serialize` and `write` function to the transport.
+
+```typescript
+import { createLogger, createStdoutLoggerTransport } from '@crowlog/logger';
+
+const logger = createLogger({ 
+  namespace: 'my-app', 
+  transports: [
+    createStdoutLoggerTransport({ 
+      serialize: ({ level, message, timestampMs, namespace, data }) => `[${level}] ${message}`,
+      // default : (args) => JSON.stringify(args),
+      writeToStdout: (serializedLog) => process.stdout.write(serializedLog),
+      // default : (serializedLog) => console.log(serializedLog),
+    })
+  ] 
+});
 ```
 
 ### In-memory transport

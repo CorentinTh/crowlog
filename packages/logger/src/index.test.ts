@@ -8,8 +8,8 @@ describe('lib interface', () => {
       'createLoggerFactory',
 
       // Transports
-      'createConsoleLoggerTransport',
       'createInMemoryLoggerTransport',
+      'createStdoutLoggerTransport',
     ]);
   });
 });
