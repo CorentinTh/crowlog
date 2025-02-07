@@ -5,8 +5,8 @@ Crowlog is a simple, lightweight, zero-dependency, and extendable logging librar
 
 ## Features
 
+- **Ultra lightweight** - Crowlog is very lightweight (less than 1kB minified + gzipped, see [comparison](#comparison)).
 - **Zero dependencies** - No runtime dependencies, just pure JavaScript.
-- **Lightweight** - Crowlog is very lightweight.
 - **Extendable** - Crowlog is designed to be extendable, so you can add your own transports and plugins to it.
 - **Simple** - Crowlog is designed to be simple and easy to use.
 - **Fully typed** - Crowlog is fully typed, so you can get autocomplete and type safety when using it.
@@ -157,6 +157,14 @@ wrapWithLoggerContext({ requestId: '123' }, () => {
 
 More details about the async context plugin can be found in the [async-context-plugin README](./packages/async-context-plugin/README.md).
 
+## Comparison
+
+| Library | Runtime dependencies | Bundled size |
+|---------|--------------|--------------|
+| @crowlog/logger@1.0.0 | 0 dependencies | 1.3kB (674B minified + gzipped) [source](https://bundlephobia.com/package/@crowlog/logger@1.0.0) |
+| pino@9.6.0 | 11 dependencies | 7.5kB (2.9kb minified + gzipped) [source](https://bundlephobia.com/package/pino@9.6.0) |
+| winston@3.17.0 | 11 dependencies | 147.9kB (37.4kB minified + gzipped) [source](https://bundlephobia.com/package/winston@3.17.0) |
+| bunyan@1.8.15 | 0 dependencies | 15.7kB (5.6kB minified + gzipped) [source](https://bundlephobia.com/package/bunyan@1.8.15) |
 
 ## License
 
