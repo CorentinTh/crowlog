@@ -12,6 +12,6 @@ export type {
 } from './logger.types';
 
 export {
-  createConsoleLoggerTransport,
   createInMemoryLoggerTransport,
+  createStdoutLoggerTransport,
 } from './transports/transports';
