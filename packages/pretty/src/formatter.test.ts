@@ -100,7 +100,8 @@ describe('formatter', () => {
         locale: 'fr-FR',
         colorFormatters: dummyColorFormatter,
       })).to.equal(`
-06:56:07 INFO [my-namespace]: Hello, world!
+06:56:07 INFO Hello, world!
+         namespace: "my-namespace"
          foo: "bar"
          baz: 123
       `.trim());

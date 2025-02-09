@@ -42,13 +42,19 @@ export function formatPrettyLog({ log, locale, colorFormatters = pc }: { log: Lo
   const firstLine = [
     colorFormatters.dim(timestamp),
     color(level.toUpperCase()),
-    colorFormatters.dim(`[${namespace}]:`),
     message,
   ].join(' ');
 
   const lines = [
     firstLine,
-    ...formatDataLines({ data, leftPadding: timestamp.length + 1, colorFormatters }),
+    ...formatDataLines({
+      data: {
+        namespace,
+        ...data,
+      },
+      leftPadding: timestamp.length + 1,
+      colorFormatters,
+    }),
   ];
 
   return lines.join('\n');
