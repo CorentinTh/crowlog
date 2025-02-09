@@ -38,6 +38,7 @@
   },
   "scripts": {
     "dev": "tsx watch --include 'src/**/*.ts' demo.ts | tsx ./src/cli.ts",
+    "dev-pino": "tsx watch --include 'src/**/*.ts' demo-pino.ts | pino-pretty",
     "build": "unbuild",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -56,6 +57,8 @@
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "eslint": "catalog:",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
     "tsx": "catalog:",
     "typescript": "catalog:",
     "unbuild": "catalog:",
