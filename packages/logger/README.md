@@ -13,6 +13,7 @@ Crowlog is a simple, lightweight, zero-dependency, and extendable logging librar
 - **Any environment** - Crowlog works in any environment, including Node.js, browsers, and the edge.
 - **Testing friendly** - Crowlog is designed to be testing friendly, so you can easily test your logs with the in-memory transport.
 - **Slightly opinionated** - Crowlog is designed to be slightly opinionated, so it has a default transport and some plugins.
+- **Pretty logs** - [Crowlog pretty log command](https://github.com/CorentinTh/crowlog/tree/main/packages/pretty) to display logs in a more readable format for development.
 
 ## Installation
 
@@ -207,6 +208,23 @@ wrapWithLoggerContext({ requestId: '123' }, () => {
 ```
 
 More details about the async context plugin can be found in the [async-context-plugin README](./packages/async-context-plugin/README.md).
+
+### Pretty logs
+
+Crowlog provides a pretty log command to display logs in a more readable format for development.
+
+![log-screenshot](.github/pretty-screenshots.png)
+
+```bash
+# using node
+node index.js | npx crowlog-pretty
+
+# using tsx
+tsx watch index.ts | npx crowlog-pretty
+```
+
+See the [pretty README](./packages/pretty/README.md) for more details.
+
 
 ## Comparison
 
