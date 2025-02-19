@@ -1,8 +1,8 @@
 <p align="center">
 <picture>
-    <source srcset="../../.github/icon-dark.png" media="(prefers-color-scheme: light)">
-    <source srcset="../../.github/icon-light.png" media="(prefers-color-scheme: dark)">
-    <img src="../../.github/icon-dark.png" alt="Header banner">
+    <source srcset="https://github.com/CorentinTh/crowlog/blob/main/.github/icon-dark.png" media="(prefers-color-scheme: light)">
+    <source srcset="https://github.com/CorentinTh/crowlog/blob/main/.github/icon-light.png" media="(prefers-color-scheme: dark)">
+    <img src="https://github.com/CorentinTh/crowlog/blob/main/.github/icon-dark.png" alt="Header banner">
 </picture>
 </p> 
 
