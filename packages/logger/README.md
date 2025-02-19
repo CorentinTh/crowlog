@@ -1,7 +1,18 @@
-# Crowlog - Extendable JS logging library
+<p align="center">
+<picture>
+    <source srcset="../../.github/icon-dark.png" media="(prefers-color-scheme: light)">
+    <source srcset="../../.github/icon-light.png" media="(prefers-color-scheme: dark)">
+    <img src="../../.github/icon-dark.png" alt="Header banner">
+</picture>
+</p> 
 
-Crowlog is a simple, lightweight, zero-dependency, and extendable logging library that is designed to be used in any project.
+<h1 align="center">
+  Crowlog - Extendable JS logging library
+</h1>
 
+<p align="center">
+  Crowlog is a simple, lightweight, zero-dependency, and extendable logging library that is designed to be used in any project.
+</p>
 
 ## Features
 
@@ -243,4 +254,6 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 This project is crafted with ❤️ by [Corentin Thomasset](https://corentin.tech).
 If you find this project helpful, please consider [supporting my work](https://buymeacoffee.com/cthmsst).
+
+The icon is the [Logs icon](https://icones.js.org/collection/all?icon=tabler:logs) from the [Tabler collection](https://github.com/tabler/tabler-icons)
 
