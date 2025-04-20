@@ -1,6 +1,6 @@
 {
   "name": "@crowlog/root",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Crowlog root package.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
