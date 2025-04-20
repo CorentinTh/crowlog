@@ -1,9 +1,23 @@
+/* eslint-disable no-console */
+/* eslint-disable node/prefer-global/process */
 import type { LoggerTransport, LoggerTransportLogArgs } from '../../logger.types';
 
+export const writeToConsole = (serializedLog: string) => console.log(serializedLog);
+export const writeToStdout = (serializedLog: string) => process.stdout.write(`${serializedLog}\n`);
+
+const defaultSerializer = (args: LoggerTransportLogArgs) => JSON.stringify(args);
+
+function getOutputFunction() {
+  if (process?.stdout?.writable && Boolean(process?.stdout?.write)) {
+    return writeToStdout;
+  }
+
+  return writeToConsole;
+}
+
 export function createStdoutLoggerTransport({
-  // eslint-disable-next-line no-console
-  writeToStdout = args => console.log(args),
-  serialize = args => JSON.stringify(args),
+  writeToStdout = getOutputFunction(),
+  serialize = defaultSerializer,
 }: {
   writeToStdout?: (serializedLog: string) => void;
   serialize?: (args: LoggerTransportLogArgs) => string;
@@ -11,8 +25,7 @@ export function createStdoutLoggerTransport({
   return {
     name: 'stdout',
     log(args) {
-      const serialized = serialize(args);
-      writeToStdout(serialized);
+      writeToStdout(serialize(args));
     },
   };
 }
