@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { createLogger } from '../../logger';
-import { createStdoutLoggerTransport } from './stdout.logger-transport';
+import { createDefaultSerializer, createStdoutLoggerTransport } from './stdout.logger-transport';
 
 describe('console logger-transport', () => {
   describe('createStdoutLoggerTransport', () => {
@@ -52,6 +52,36 @@ describe('console logger-transport', () => {
       expect(stdoutArgs).toEqual([
         'xX Hello Xx',
       ]);
+    });
+  });
+
+  describe('defaultSerializer', () => {
+    test('the default serializer serializes the log args to a JSON string, without omitting the error property', () => {
+      const serializer = createDefaultSerializer({ includeErrorStack: false });
+
+      class CustomError extends Error {
+        code: string;
+        constructor(message: string) {
+          super(message);
+          this.name = 'CustomError';
+          this.code = 'ERROR_2';
+        }
+      }
+
+      expect(
+        serializer({
+          level: 'info',
+          message: 'foo',
+          timestampMs: 1738800000000,
+          namespace: 'test',
+          data: {
+            error1: new Error('bar'),
+            error2: new CustomError('baz'),
+            error3: Object.assign(new Error('qux'), { code: 'ERROR_3' }),
+            foo: 'bar',
+          },
+        }),
+      ).to.eql('{"level":"info","message":"foo","timestampMs":1738800000000,"namespace":"test","data":{"error1":{"message":"bar","name":"Error"},"error2":{"code":"ERROR_2","name":"CustomError","message":"baz"},"error3":{"code":"ERROR_3","message":"qux","name":"Error"},"foo":"bar"}}');
     });
   });
 });

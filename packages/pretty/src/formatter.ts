@@ -13,13 +13,25 @@ export function getLevelColorFormatter({ level, colorFormatters = pc }: { level:
   return formatterMap[level] ?? colorFormatters.gray;
 }
 
-export function serializeValue(value: unknown) {
-  if (typeof value === 'object' && value !== null) {
+export function serializeValue({ value, colorFormatters = pc, leftPadding = 0 }: { value: unknown; colorFormatters?: Colors; leftPadding?: number }): string {
+  if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+    const newLeftPadding = leftPadding + 2;
+    const currentPadding = ' '.repeat(leftPadding);
+    const padding = ' '.repeat(newLeftPadding);
+
+    return `{\n${Object
+      .entries(value)
+      .map(([key, value]) => `${padding}${key}: ${serializeValue({ value, colorFormatters, leftPadding: newLeftPadding })}`)
+      .join('\n')}\n${currentPadding}}`;
+  }
+
+  if (Array.isArray(value)) {
     return JSON.stringify(value);
   }
 
   if (typeof value === 'string') {
-    return `"${value}"`;
+    const padding = ' '.repeat(leftPadding);
+    return `"${value}"`.replaceAll('\n', `\n${padding}`);
   }
 
   return String(value);
@@ -30,7 +42,7 @@ export function formatDataLines({ data, leftPadding, colorFormatters = pc }: { d
 
   return Object
     .entries(data)
-    .map(([key, value]) => padding + colorFormatters.dim(`${key}: ${serializeValue(value)}`));
+    .map(([key, value]) => padding + colorFormatters.dim(`${key}: ${serializeValue({ value, colorFormatters, leftPadding })}`));
 }
 
 export function formatPrettyLog({ log, locale, colorFormatters = pc }: { log: LoggerTransportLogArgs; locale?: string; colorFormatters?: Colors }) {

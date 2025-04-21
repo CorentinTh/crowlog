@@ -5,7 +5,20 @@ import type { LoggerTransport, LoggerTransportLogArgs } from '../../logger.types
 export const writeToConsole = (serializedLog: string) => console.log(serializedLog);
 export const writeToStdout = (serializedLog: string) => process.stdout.write(`${serializedLog}\n`);
 
-const defaultSerializer = (args: LoggerTransportLogArgs) => JSON.stringify(args);
+export function createDefaultSerializer({ includeErrorStack = true }: { includeErrorStack?: boolean } = {}) {
+  return (args: LoggerTransportLogArgs) => JSON.stringify(args, (_key, value) => {
+    if (value instanceof Error) {
+      return {
+        ...value,
+        message: value.message,
+        name: value.name,
+        ...(includeErrorStack && { stack: value.stack }),
+      };
+    }
+
+    return value;
+  });
+}
 
 function getOutputFunction() {
   if (process?.stdout?.writable && Boolean(process?.stdout?.write)) {
@@ -17,7 +30,7 @@ function getOutputFunction() {
 
 export function createStdoutLoggerTransport({
   writeToStdout = getOutputFunction(),
-  serialize = defaultSerializer,
+  serialize = createDefaultSerializer(),
 }: {
   writeToStdout?: (serializedLog: string) => void;
   serialize?: (args: LoggerTransportLogArgs) => string;
