@@ -44,7 +44,6 @@
     "test": "TZ=UTC vitest run",
     "test:watch": "TZ=UTC vitest watch",
     "typecheck": "tsc --noEmit",
-    "prepare": "pnpm run build",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
