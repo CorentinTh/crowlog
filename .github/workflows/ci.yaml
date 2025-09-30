@@ -1,4 +1,4 @@
-name: CI - Async Context Plugin
+name: CI - Monorepo
 
 on:
   pull_request:
@@ -7,12 +7,9 @@ on:
       - main
 
 jobs:
-  ci-async-context-plugin:
-    name: CI - Async Context Plugin
+  ci-monorepo:
+    name: CI - Monorepo
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/async-context-plugin
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -28,14 +25,15 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
-      - name: Run linters
-        run: pnpm lint
+      - name: Run linters in all packages
+        run: pnpm -r --parallel lint
 
-      - name: Type check
-        run: pnpm typecheck
+        # No --parallel here, as some packages depend on others being built first
+      - name: Build all packages
+        run: pnpm -r build
 
-      - name: Run unit test
+      - name: Run tests from vitest projects
         run: pnpm test
 
-      - name: Build the app
-        run: pnpm build
+      - name: Run typechecks in all packages
+        run: pnpm -r --parallel typecheck

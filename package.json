@@ -18,9 +18,15 @@
     "transport"
   ],
   "scripts": {
-    "release": "bumpp --recursive --commit --tag --push"
+    "release": "bumpp --recursive --commit --tag --push",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
   },
   "dependencies": {
     "bumpp": "^10.0.2"
+  },
+  "devDependencies": {
+    "vitest": "catalog:",
+    "@vitest/coverage-v8": "catalog:"
   }
 }
