@@ -12,6 +12,10 @@ export type {
 } from './logger.types';
 
 export {
+  createNoopLogger,
+} from './noop-logger';
+
+export {
   createInMemoryLoggerTransport,
   createStdoutLoggerTransport,
 } from './transports/transports';
