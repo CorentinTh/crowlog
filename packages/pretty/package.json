@@ -26,6 +26,14 @@
     "transport",
     "pretty"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./cli": "./dist/cli.js",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "bin": {
     "crowlog-pretty": "./bin/crowlog-pretty.mjs"
   },
@@ -37,7 +45,7 @@
   },
   "scripts": {
     "dev": "tsx watch --include 'src/**/*.ts' demo.ts | tsx ./src/cli.ts",
-    "build": "unbuild",
+    "build": "tsdown",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "TZ=UTC vitest run",
@@ -54,9 +62,9 @@
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "eslint": "catalog:",
+    "tsdown": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
-    "unbuild": "catalog:",
     "vitest": "catalog:"
   }
 }
