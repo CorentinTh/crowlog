@@ -26,13 +26,11 @@
     "transport"
   ],
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -41,7 +39,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "build": "unbuild",
+    "build": "tsdown",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "vitest run",
@@ -49,16 +47,15 @@
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "pnpm run build"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "eslint": "catalog:",
+    "tsdown": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
-    "unbuild": "catalog:",
     "vitest": "catalog:"
   }
 }
