@@ -18,15 +18,19 @@
     "transport"
   ],
   "scripts": {
-    "release": "bumpp --recursive --commit --tag --push",
-    "test": "vitest run",
-    "test:watch": "vitest watch"
+    "changeset": "changeset",
+    "changeset:version": "pnpm changeset version && pnpm install --no-frozen-lockfile",
+    "changeset:publish": "pnpm changeset publish",
+    "test": "TZ=UTC vitest run",
+    "test:watch": "TZ=UTC vitest watch"
   },
   "dependencies": {
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.7",
     "bumpp": "^10.0.2"
   },
   "devDependencies": {
-    "vitest": "catalog:",
-    "@vitest/coverage-v8": "catalog:"
+    "@vitest/coverage-v8": "catalog:",
+    "vitest": "catalog:"
   }
 }
