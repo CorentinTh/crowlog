@@ -4,7 +4,7 @@
   "description": "Crowlog root package.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.17.1",
   "keywords": [
     "logger",
     "logging",
