@@ -1,5 +1,11 @@
 # @crowlog/pretty
 
+## 2.0.1
+
+### Patch Changes
+
+- [#23](https://github.com/CorentinTh/crowlog/pull/23) [`61a961b`](https://github.com/CorentinTh/crowlog/commit/61a961bdd5157d5a2dbc8b17c4e10657c18c2a52) Thanks [@CorentinTh](https://github.com/CorentinTh)! - Fix incorrect cli import path
+
 ## 2.0.0
 
 ### Major Changes
