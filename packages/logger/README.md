@@ -4,7 +4,7 @@
     <source srcset="https://github.com/CorentinTh/crowlog/blob/main/.github/icon-light.png" media="(prefers-color-scheme: dark)">
     <img src="https://github.com/CorentinTh/crowlog/blob/main/.github/icon-dark.png" alt="Header banner">
 </picture>
-</p> 
+</p>
 
 <h1 align="center">
   Crowlog - Extendable JS logging library
@@ -29,7 +29,7 @@
 ## Installation
 
 ```bash
-# pnpm 
+# pnpm
 pnpm install @crowlog/logger
 
 # npm
@@ -92,7 +92,7 @@ const logger = createLogger({ namespace: 'child' });
 
 ## Transports
 
-A transport specifies where the logs are sent to. By default, Crowlog uses the `stdout` transport. 
+A transport specifies where the logs are sent to. By default, Crowlog uses the `stdout` transport.
 
 ### Stdout transport
 
@@ -115,16 +115,16 @@ You can customize the serialization and the write function by providing a custom
 ```typescript
 import { createLogger, createStdoutLoggerTransport } from '@crowlog/logger';
 
-const logger = createLogger({ 
-  namespace: 'my-app', 
+const logger = createLogger({
+  namespace: 'my-app',
   transports: [
-    createStdoutLoggerTransport({ 
+    createStdoutLoggerTransport({
       serialize: ({ level, message, timestampMs, namespace, data }) => `[${level}] ${message}`,
       // default : (args) => JSON.stringify(args),
       writeToStdout: (serializedLog) => process.stdout.write(serializedLog),
       // default : (serializedLog) => console.log(serializedLog),
     })
-  ] 
+  ]
 });
 ```
 
@@ -237,6 +237,37 @@ tsx watch index.ts | npx crowlog-pretty
 See the [pretty README](./packages/pretty/README.md) for more details.
 
 
+### Noop Logger
+
+The `@crowlog/logger` package also provides a `createNoopLogger` function to create a logger that does nothing. This is useful for testing or when you want to disable logging.
+
+```typescript
+// Some function with an inected logger
+function doSomething({ logger }) {
+  logger.info('Will do something');
+  const foo = 42;
+  logger.debug({ foo }, 'Did something');
+
+  return foo;
+}
+
+// In test for example
+import { createNoopLogger } from '@crowlog/logger';
+
+const logger = createNoopLogger();
+
+describe("doSomething", () => {
+  test("stuff happens", () => {
+    // no logs will be printed
+    const result = doSomething({ logger = createNoopLogger() });
+
+    expect(result).toBe(42);
+  })
+})
+```
+
+
+
 ## Comparison
 
 | Library | Runtime dependencies | Bundled size |
@@ -250,10 +281,9 @@ See the [pretty README](./packages/pretty/README.md) for more details.
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
 
-## Credits 
+## Credits
 
 This project is crafted with ❤️ by [Corentin Thomasset](https://corentin.tech).
 If you find this project helpful, please consider [supporting my work](https://buymeacoffee.com/cthmsst).
 
 The icon is the [Logs icon](https://icones.js.org/collection/all?icon=tabler:logs) from the [Tabler collection](https://github.com/tabler/tabler-icons)
-
