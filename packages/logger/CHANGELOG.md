@@ -1,5 +1,11 @@
 # @crowlog/logger
 
+## 2.1.0
+
+### Minor Changes
+
+- [#26](https://github.com/CorentinTh/crowlog/pull/26) [`08bbaf0`](https://github.com/CorentinTh/crowlog/commit/08bbaf04f9561bfbebe28ebe3247291cd39d452e) Thanks [@CorentinTh](https://github.com/CorentinTh)! - Added the global context plugin
+
 ## 2.0.0
 
 ### Major Changes
