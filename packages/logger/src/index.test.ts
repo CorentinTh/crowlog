@@ -13,6 +13,9 @@ describe('lib interface', () => {
 
       // Noop logger
       'createNoopLogger',
+
+      // Plugins
+      'createGlobalLogContextPlugin',
     ].toSorted());
   });
 });

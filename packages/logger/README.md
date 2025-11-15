@@ -178,10 +178,6 @@ A plugin permit to extend the logger with custom functionality.
 
 ### Async context plugin
 
-The async context plugin is a plugin that adds the async context to the logs.
-
-### Async context plugin
-
 Permit to easily add context data to the logs, it's useful in http servers to add log context that follow the lifecycle of a request (like a request id).
 
 > [!IMPORTANT]
@@ -219,6 +215,61 @@ wrapWithLoggerContext({ requestId: '123' }, () => {
 ```
 
 More details about the async context plugin can be found in the [async-context-plugin README](./packages/async-context-plugin/README.md).
+
+### Global log context plugin
+
+The global log context plugin allows you to set global context data that will be automatically included in all logs. This is useful for adding application-wide context like environment, version, or any other static data that should appear in every log entry.
+
+Unlike the async context plugin, the global context is shared across all loggers using the same plugin instance and persists until explicitly changed.
+
+```typescript
+import { createLogger, createGlobalLogContextPlugin } from '@crowlog/logger';
+
+const { globalContextPlugin, setGlobalLogContext, addToGlobalLogContext, getGlobalLogContext } = createGlobalLogContextPlugin();
+
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [globalContextPlugin]
+});
+
+// Set the global context
+setGlobalLogContext({ environment: 'production', version: '1.0.0' });
+
+logger.info('Application started');
+// Output includes: { environment: 'production', version: '1.0.0' }
+
+// Add to the existing global context
+addToGlobalLogContext({ region: 'us-east-1' });
+
+logger.info('Processing request');
+// Output includes: { environment: 'production', version: '1.0.0', region: 'us-east-1' }
+```
+
+**API:**
+
+- `setGlobalLogContext(context)` - Replace the entire global context
+- `addToGlobalLogContext(context)` - Shallow merge new properties into the existing global context
+- `getGlobalLogContext()` - Retrieve the current global context
+
+**TypeScript support:**
+
+You can provide a type for the global context to ensure type safety when setting or adding to the global context.
+
+```typescript
+type MyGlobalContext = {
+  environment: string;
+  version: string;
+  region?: string;
+};
+
+const { globalContextPlugin, setGlobalLogContext } = createGlobalLogContextPlugin<MyGlobalContext>();
+
+// TypeScript will enforce the shape of the context
+setGlobalLogContext({ environment: 'production', version: '1.0.0' });
+```
+
+> [!NOTE]
+> When there's a conflict between global context and log-specific data, the log-specific data takes precedence.
 
 ### Pretty logs
 
