@@ -1,7 +1,7 @@
 {
   "name": "@crowlog/async-context-plugin",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Crowlog async context plugin.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
