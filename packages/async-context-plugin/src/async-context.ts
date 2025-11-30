@@ -15,7 +15,8 @@ export function addLogContext(context: Record<string, unknown>) {
 }
 
 export function wrapWithLoggerContext<T>(data: Record<string, unknown>, cb: () => T) {
-  return asyncLocalStorage.run({ ...data }, cb);
+  const currentContext = asyncLocalStorage.getStore() ?? {};
+  return asyncLocalStorage.run({ ...currentContext, ...data }, cb);
 }
 
 export function getLoggerContext() {

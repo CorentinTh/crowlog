@@ -129,5 +129,186 @@ describe('async-context', () => {
         },
       ]);
     });
+
+    describe('the context is preserved in deferred callbacks', () => {
+      test('context is preserved in setImmediate', async () => {
+        const transport = createInMemoryLoggerTransport();
+
+        const logger = createLogger({
+          namespace: 'test',
+          plugins: [createAsyncContextPlugin()],
+          transports: [transport],
+        });
+
+        await wrapWithLoggerContext({ a: 1 }, async () => {
+          addLogContext({ b: 2 });
+
+          setImmediate(() => {
+            logger.info({ c: 3 }, 'test');
+          });
+        });
+
+        await new Promise(resolve => setImmediate(resolve));
+
+        expect(transport.getLogs({ excludeTimestampMs: true })).to.eql([
+          {
+            level: 'info',
+            message: 'test',
+            namespace: 'test',
+            data: { a: 1, b: 2, c: 3 },
+          },
+        ]);
+      });
+
+      test('context is preserved in setTimeout', async () => {
+        const transport = createInMemoryLoggerTransport();
+
+        const logger = createLogger({
+          namespace: 'test',
+          plugins: [createAsyncContextPlugin()],
+          transports: [transport],
+        });
+
+        await wrapWithLoggerContext({ a: 1 }, async () => {
+          addLogContext({ b: 2 });
+
+          setTimeout(() => {
+            logger.info({ c: 3 }, 'test');
+          }, 0);
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        expect(transport.getLogs({ excludeTimestampMs: true })).to.eql([
+          {
+            level: 'info',
+            message: 'test',
+            namespace: 'test',
+            data: { a: 1, b: 2, c: 3 },
+          },
+        ]);
+      });
+
+      test('context is preserved in resolved Promise.then', async () => {
+        const transport = createInMemoryLoggerTransport();
+
+        const logger = createLogger({
+          namespace: 'test',
+          plugins: [createAsyncContextPlugin()],
+          transports: [transport],
+        });
+
+        await wrapWithLoggerContext({ a: 1 }, async () => {
+          addLogContext({ b: 2 });
+
+          Promise.resolve().then(() => {
+            logger.info({ c: 3 }, 'test');
+          });
+        });
+
+        await new Promise(resolve => setImmediate(resolve));
+
+        expect(transport.getLogs({ excludeTimestampMs: true })).to.eql([
+          {
+            level: 'info',
+            message: 'test',
+            namespace: 'test',
+            data: { a: 1, b: 2, c: 3 },
+          },
+        ]);
+      });
+    });
+
+    describe('wrapping can be nested', () => {
+      test('with nested wrappings, the contexts of all levels are merged', () => {
+        const transport = createInMemoryLoggerTransport();
+
+        const logger = createLogger({
+          namespace: 'test',
+          plugins: [createAsyncContextPlugin()],
+          transports: [transport],
+        });
+
+        wrapWithLoggerContext({ a: 1 }, () => {
+          addLogContext({ b: 2 });
+
+          logger.info({ c: 3 }, 'test1');
+
+          wrapWithLoggerContext({ d: 4 }, () => {
+            addLogContext({ e: 5 });
+
+            logger.info({ f: 6 }, 'test2');
+          });
+
+          logger.info({ g: 7 }, 'test3');
+        });
+
+        expect(transport.getLogs({ excludeTimestampMs: true })).to.eql([
+          {
+            level: 'info',
+            message: 'test1',
+            namespace: 'test',
+            data: { a: 1, b: 2, c: 3 },
+          },
+          {
+            level: 'info',
+            message: 'test2',
+            namespace: 'test',
+            data: { a: 1, b: 2, d: 4, e: 5, f: 6 },
+          },
+          {
+            level: 'info',
+            message: 'test3',
+            namespace: 'test',
+            data: { a: 1, b: 2, g: 7 },
+          },
+        ]);
+      });
+
+      test('when nested wrappings have colliding keys, the innermost wrapping takes precedence', () => {
+        const transport = createInMemoryLoggerTransport();
+
+        const logger = createLogger({
+          namespace: 'test',
+          plugins: [createAsyncContextPlugin()],
+          transports: [transport],
+        });
+
+        wrapWithLoggerContext({ a: 1 }, () => {
+          addLogContext({ b: 2 });
+
+          logger.info({ c: 3 }, 'test1');
+
+          wrapWithLoggerContext({ a: 4 }, () => {
+            addLogContext({ b: 5 });
+
+            logger.info({ f: 6 }, 'test2');
+          });
+
+          logger.info({ g: 7 }, 'test3');
+        });
+
+        expect(transport.getLogs({ excludeTimestampMs: true })).to.eql([
+          {
+            level: 'info',
+            message: 'test1',
+            namespace: 'test',
+            data: { a: 1, b: 2, c: 3 },
+          },
+          {
+            level: 'info',
+            message: 'test2',
+            namespace: 'test',
+            data: { a: 4, b: 5, f: 6 },
+          },
+          {
+            level: 'info',
+            message: 'test3',
+            namespace: 'test',
+            data: { a: 1, b: 2, g: 7 },
+          },
+        ]);
+      });
+    });
   });
 });
