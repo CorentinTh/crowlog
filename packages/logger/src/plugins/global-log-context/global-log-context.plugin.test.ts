@@ -393,36 +393,36 @@ describe('global-context-plugin', () => {
 
     describe('typed global context', () => {
       test('global context can be typed', () => {
-      type MyGlobalLogContext = {
-        userId: string;
-        requestId: string;
-      };
+        type MyGlobalLogContext = {
+          userId: string;
+          requestId: string;
+        };
 
-      const transport = createInMemoryLoggerTransport();
+        const transport = createInMemoryLoggerTransport();
 
-      const { globalContextPlugin, setGlobalLogContext } = createGlobalLogContextPlugin<MyGlobalLogContext>();
+        const { globalContextPlugin, setGlobalLogContext } = createGlobalLogContextPlugin<MyGlobalLogContext>();
 
-      const logger = createLogger({
-        namespace: 'test',
-        plugins: [globalContextPlugin],
-        transports: [transport],
-      });
-
-      setGlobalLogContext({ userId: 'user123', requestId: 'req456' });
-
-      logger.info({}, 'test');
-
-      expect(transport.getLogs({ excludeTimestampMs: true })).to.eql([
-        {
-          level: 'info',
-          message: 'test',
+        const logger = createLogger({
           namespace: 'test',
-          data: {
-            userId: 'user123',
-            requestId: 'req456',
+          plugins: [globalContextPlugin],
+          transports: [transport],
+        });
+
+        setGlobalLogContext({ userId: 'user123', requestId: 'req456' });
+
+        logger.info({}, 'test');
+
+        expect(transport.getLogs({ excludeTimestampMs: true })).to.eql([
+          {
+            level: 'info',
+            message: 'test',
+            namespace: 'test',
+            data: {
+              userId: 'user123',
+              requestId: 'req456',
+            },
           },
-        },
-      ]);
+        ]);
       });
     });
   });
