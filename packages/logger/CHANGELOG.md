@@ -1,5 +1,13 @@
 # @crowlog/logger
 
+## 2.2.0
+
+### Minor Changes
+
+- [#32](https://github.com/CorentinTh/crowlog/pull/32) [`df677b7`](https://github.com/CorentinTh/crowlog/commit/df677b7efed27b588c30bc4a546a1511d4133b8a) Thanks [@CorentinTh](https://github.com/CorentinTh)! - Added filter plugin
+
+- [#10](https://github.com/CorentinTh/crowlog/pull/10) [`de09fb2`](https://github.com/CorentinTh/crowlog/commit/de09fb2480b1b76e36fdf1f43c9ebdc5f25076fd) Thanks [@CorentinTh](https://github.com/CorentinTh)! - Added the redact plugin
+
 ## 2.1.0
 
 ### Minor Changes
