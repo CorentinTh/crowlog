@@ -271,6 +271,99 @@ setGlobalLogContext({ environment: 'production', version: '1.0.0' });
 > [!NOTE]
 > When there's a conflict between global context and log-specific data, the log-specific data takes precedence.
 
+### Redact plugin
+
+The redact plugin allows you to automatically hide sensitive data from your logs by specifying paths to values that should be redacted. This is useful for preventing secrets, passwords, API keys, or other sensitive information from appearing in your logs.
+
+```typescript
+import { createLogger, createRedactPlugin } from '@crowlog/logger';
+
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createRedactPlugin({
+      paths: ['user.password', 'apiKey', 'creditCard.number']
+    })
+  ]
+});
+
+logger.info({
+  user: {
+    email: 'user@example.com',
+    password: 'secret123'
+  },
+  apiKey: 'sk_live_abc123'
+}, 'User authenticated');
+
+// Output data will be:
+// {
+//   user: {
+//     email: 'user@example.com',
+//     password: '[redacted]'
+//   },
+//   apiKey: '[redacted]'
+// }
+```
+
+**Configuration options:**
+
+- `paths` - Array of dot-separated paths to redact (e.g., `['user.password', 'apiKey']`)
+- `redactedValue` - Custom replacement value (default: `'[redacted]'`)
+
+**Advanced path syntax:**
+
+The redact plugin supports advanced path patterns for working with arrays:
+
+```typescript
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createRedactPlugin({
+      paths: [
+        'users.*.password',           // Redact password in all array items
+        'users.0.email',              // Redact email of first user only
+        'teams.*.members.*.apiKey',   // Nested arrays with wildcards
+        'tokens.*'                    // Redact all array values
+      ]
+    })
+  ]
+});
+
+logger.info({
+  users: [
+    { email: 'user1@example.com', password: 'pass1' },
+    { email: 'user2@example.com', password: 'pass2' }
+  ],
+  tokens: ['token1', 'token2', 'token3']
+}, 'Multiple users');
+
+// Output data will be:
+// {
+//   users: [
+//     { email: '[redacted]', password: '[redacted]' },
+//     { email: 'user2@example.com', password: '[redacted]' }
+//   ],
+//   tokens: ['[redacted]', '[redacted]', '[redacted]']
+// }
+```
+
+**Custom redacted value:**
+
+```typescript
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createRedactPlugin({
+      paths: ['user.password'],
+      redactedValue: '***HIDDEN***'
+    })
+  ]
+});
+```
+
+> [!NOTE]
+> The redact plugin creates a deep copy of the log data before redacting, so the original objects passed to the logger are never modified.
+
 ### Pretty logs
 
 Crowlog provides a pretty log command to display logs in a more readable format for development.
