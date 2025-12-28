@@ -364,6 +364,154 @@ const logger = createLogger({
 > [!NOTE]
 > The redact plugin creates a deep copy of the log data before redacting, so the original objects passed to the logger are never modified.
 
+### Filter plugin
+
+The filter plugin allows you to control which logs are actually sent to transports by filtering them based on log level, namespace, or custom criteria. This is useful for reducing noise in production, debugging specific parts of your application, or implementing environment-specific logging policies.
+
+```typescript
+import { createLogger, createFilterPlugin } from '@crowlog/logger';
+
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createFilterPlugin({
+      minLevel: 'warn'  // Only log warnings and errors
+    })
+  ]
+});
+
+logger.debug('Debug message');  // Filtered out
+logger.info('Info message');    // Filtered out
+logger.warn('Warning message'); // Logged
+logger.error('Error message');  // Logged
+```
+
+**Configuration options:**
+
+The filter plugin supports multiple filtering strategies that can be combined:
+
+**Level filtering:**
+
+- `minLevel` - Minimum log level to allow (logs below this level are filtered out)
+- `maxLevel` - Maximum log level to allow (logs above this level are filtered out)
+- `onlyLevels` - Array of specific levels to allow (all other levels are filtered out)
+
+**Namespace filtering:**
+
+- `excludedNamespaces` - Array of namespaces to filter out
+- `onlyNamespaces` - Array of namespaces to allow (all other namespaces are filtered out)
+
+**Custom filtering:**
+
+- `customFilter` - Function that receives the log context and returns `true` to allow or `false` to filter out
+
+**Examples:**
+
+Filter by minimum level (production use case):
+
+```typescript
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createFilterPlugin({
+      minLevel: 'info'  // Filter out debug logs in production
+    })
+  ]
+});
+```
+
+Filter by level range:
+
+```typescript
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createFilterPlugin({
+      minLevel: 'info',
+      maxLevel: 'warn'  // Only log info and warn, exclude debug and error
+    })
+  ]
+});
+```
+
+Filter specific levels only:
+
+```typescript
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createFilterPlugin({
+      onlyLevels: ['error']  // Only log errors
+    })
+  ]
+});
+```
+
+Filter by namespace:
+
+```typescript
+const productionLogger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createFilterPlugin({
+      excludedNamespaces: ['debug-utils', 'test-helpers']  // Exclude noisy namespaces
+    })
+  ]
+});
+
+const debugLogger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createFilterPlugin({
+      onlyNamespaces: ['auth', 'database']  // Only log from specific namespaces
+    })
+  ]
+});
+```
+
+Custom filter based on log data:
+
+```typescript
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createFilterPlugin({
+      customFilter: ({ context }) => {
+        // Only log if the data contains an error or is explicitly marked as important
+        return context.data.error !== undefined || context.data.important === true;
+      }
+    })
+  ]
+});
+
+logger.info({ important: true }, 'Critical update');  // Logged
+logger.info('Regular message');                       // Filtered out
+logger.error({ error: new Error('Failed') }, 'Oops'); // Logged
+```
+
+Combine multiple filters:
+
+```typescript
+const logger = createLogger({
+  namespace: 'my-app',
+  plugins: [
+    createFilterPlugin({
+      minLevel: 'info',                      // Must be info or above
+      excludedNamespaces: ['debug-utils'],   // AND not from debug-utils
+      customFilter: ({ context }) => {       // AND pass custom logic
+        return !context.message.includes('sensitive');
+      }
+    })
+  ]
+});
+```
+
+> [!NOTE]
+> When multiple filter options are provided, **all filters must pass** (AND logic) for a log to be sent to transports. If any filter rejects the log, it will be filtered out.
+
+> [!TIP]
+> The `onlyLevels` option takes precedence over `minLevel` and `maxLevel`. If you specify `onlyLevels`, the `minLevel` and `maxLevel` options will be ignored.
+
 ### Pretty logs
 
 Crowlog provides a pretty log command to display logs in a more readable format for development.

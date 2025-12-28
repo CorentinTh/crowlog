@@ -22,4 +22,5 @@ export type LogMethodArguments = [data: Record<string, unknown>, message: string
 export type LoggerPlugin = {
   name: string;
   transformLogContext?: (args: { context: LoggerTransportLogArgs }) => { context: LoggerTransportLogArgs };
+  shouldLog?: (args: { context: LoggerTransportLogArgs }) => boolean;
 };
