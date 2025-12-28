@@ -16,6 +16,10 @@ export {
 } from './noop-logger';
 
 export {
+  createFilterPlugin,
+} from './plugins/filter-plugin/filter.plugin';
+
+export {
   createGlobalLogContextPlugin,
 } from './plugins/global-log-context/global-log-context.plugin';
 

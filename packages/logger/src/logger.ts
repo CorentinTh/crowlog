@@ -25,6 +25,10 @@ export function createLogger({
         data,
       };
 
+      if (!applyPluginsShouldLog({ baseContext, plugins })) {
+        return;
+      }
+
       const extendedContext = applyPluginsTransformLogContext({ baseContext, plugins });
 
       transports.forEach((transport) => {
@@ -48,6 +52,14 @@ export function createLogger({
       getTimestamp,
     }),
   };
+}
+
+export function applyPluginsShouldLog({ baseContext, plugins }: { baseContext: LoggerTransportLogArgs; plugins: LoggerPlugin[] }) {
+  if (plugins.length === 0) {
+    return true;
+  }
+
+  return plugins.every(plugin => plugin.shouldLog?.({ context: baseContext }) ?? true);
 }
 
 export function applyPluginsTransformLogContext({ baseContext, plugins }: { baseContext: LoggerTransportLogArgs; plugins: LoggerPlugin[] }) {

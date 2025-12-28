@@ -17,6 +17,7 @@ describe('lib interface', () => {
       // Plugins
       'createGlobalLogContextPlugin',
       'createRedactPlugin',
+      'createFilterPlugin',
     ].toSorted());
   });
 });
