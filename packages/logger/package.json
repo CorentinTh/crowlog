@@ -1,7 +1,7 @@
 {
   "name": "@crowlog/logger",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Crowlog logger.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
