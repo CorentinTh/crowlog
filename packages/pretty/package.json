@@ -54,7 +54,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "picocolors": "^1.1.1"
+    "picocolors": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
