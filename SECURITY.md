@@ -15,7 +15,7 @@ Send an email to **corentinth@proton.me** with the following information:
 
 ### What to Expect
 
-- **Acknowledgment**: You'll receive a response within days acknowledging your report
+- **Acknowledgment**: You'll receive a response within 3 business days acknowledging your report
 - **Updates**: You'll be kept informed as we investigate and address the issue
 - **Credit**: You'll be credited for the discovery (unless you prefer to remain anonymous)
 
