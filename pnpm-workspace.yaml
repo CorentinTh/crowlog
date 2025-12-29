@@ -7,7 +7,7 @@ catalog:
   '@vitest/coverage-v8': 4.0.16
   eslint: 9.39.2
   picocolors: 1.1.1
-  tsdown: 0.15.6
+  tsdown: 0.15.12
   tsx: 4.21.0
   typescript: 5.9.3
   vitest: 4.0.16
