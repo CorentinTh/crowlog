@@ -2,23 +2,30 @@
   "name": "@crowlog/async-context-plugin",
   "type": "module",
   "version": "2.1.0",
-  "description": "Crowlog async context plugin.",
+  "description": "Request-scoped logging context plugin for Crowlog using Node.js AsyncLocalStorage. Perfect for tracking request IDs and user context across async operations.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
-  "homepage": "https://github.com/CorentinTh/crowlog/tree/main/packages/async-context-plugin",
+  "homepage": "https://crowlog.dev/plugins/async-context",
+  "documentation": "https://crowlog.dev/plugins/async-context",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CorentinTh/crowlog"
+    "url": "https://github.com/CorentinTh/crowlog",
+    "directory": "packages/async-context-plugin"
   },
   "bugs": {
     "url": "https://github.com/CorentinTh/crowlog/issues"
   },
   "keywords": [
+    "crowlog",
     "logger",
     "logging",
     "async",
     "context",
-    "plugin"
+    "plugin",
+    "asynclocalstorage",
+    "request-id",
+    "tracing",
+    "correlation-id"
   ],
   "exports": {
     ".": "./dist/index.js",
