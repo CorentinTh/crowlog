@@ -11,7 +11,15 @@
 </h1>
 
 <p align="center">
-  Crowlog is a simple, lightweight, zero-dependency, and extendable logging library that is designed to be used in any project.
+  Crowlog is a simple, lightweight, zero-dependency, and extendable logging library for any JavaScript environment.
+</p>
+
+<p align="center">
+  <a href="https://crowlog.dev">Docs</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://github.com/CorentinTh/crowlog">GitHub</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://www.npmjs.com/package/@crowlog/logger">NPM</a>
 </p>
 
 ## Features
