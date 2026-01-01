@@ -8,6 +8,9 @@ export default defineConfig({
   lastUpdated: true,
   outDir: './dist',
   cleanUrls: true,
+  sitemap: {
+    hostname: 'https://crowlog.dev',
+  },
   markdown: {
     theme: {
       dark: 'vitesse-dark',
@@ -16,7 +19,33 @@ export default defineConfig({
   },
   description: 'Crowlog is a simple, lightweight, zero-dependency, and extendable logging library that is designed to be used in any project.',
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: '/logo-dark.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo-dark.svg' }],
+    ['meta', { name: 'author', content: 'Corentin Thomasset' }],
+    ['meta', { name: 'keywords', content: 'logging, logger, javascript, typescript, lightweight, zero-dependency, structured logging, nodejs, browser, edge, cloudflare workers, deno, bun' }],
+
+    // Open Graph
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: 'Crowlog' }],
+    ['meta', { property: 'og:title', content: 'Crowlog - Extendable JS logging library' }],
+    ['meta', { property: 'og:description', content: 'Ultra lightweight, zero-dependency, extendable logging library for any JavaScript environment. Works in Node.js, browsers, and edge runtimes.' }],
+    ['meta', { property: 'og:url', content: 'https://crowlog.dev' }],
+    ['meta', { property: 'og:image', content: 'https://crowlog.dev/og-image.png' }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:image:alt', content: 'Crowlog - Extendable JS logging library' }],
+
+    // Twitter Card
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: 'Crowlog - Extendable JS logging library' }],
+    ['meta', { name: 'twitter:description', content: 'Ultra lightweight, zero-dependency, extendable logging library for any JavaScript environment.' }],
+    ['meta', { name: 'twitter:image', content: 'https://crowlog.dev/og-image.png' }],
+    ['meta', { name: 'twitter:image:alt', content: 'Crowlog - Extendable JS logging library' }],
+    ['meta', { name: 'twitter:site', content: '@CorentinTh' }],
+    ['meta', { name: 'twitter:creator', content: '@CorentinTh' }],
+
+    // Additional SEO
+    ['meta', { name: 'theme-color', content: '#fff383' }],
+    ['link', { rel: 'canonical', href: 'https://crowlog.dev' }],
   ],
   themeConfig: {
     siteTitle: 'Crowlog',
