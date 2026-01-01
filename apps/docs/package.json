@@ -1,15 +1,10 @@
 {
   "name": "@crowlog/docs",
   "type": "module",
-  "version": "1.0.0",
+  "private": true,
   "packageManager": "pnpm@10.26.2",
-  "description": "",
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
-  "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vitepress dev",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
