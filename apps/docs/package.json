@@ -1,0 +1,25 @@
+{
+  "name": "@crowlog/docs",
+  "type": "module",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.26.2",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vitepress dev",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vitepress": "catalog:"
+  }
+}
