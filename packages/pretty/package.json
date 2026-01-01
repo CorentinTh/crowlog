@@ -2,29 +2,31 @@
   "name": "@crowlog/pretty",
   "type": "module",
   "version": "2.0.1",
-  "description": "Crowlog pretty logger pipe.",
+  "description": "Pretty formatter for Crowlog JSON logs. Pipe your logs through this CLI for beautiful, colored, human-readable output during development.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
-  "homepage": "https://github.com/CorentinTh/crowlog/tree/main/packages/pretty",
+  "homepage": "https://crowlog.dev/guides/pretty-logging",
+  "documentation": "https://crowlog.dev/guides/pretty-logging",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CorentinTh/crowlog"
+    "url": "https://github.com/CorentinTh/crowlog",
+    "directory": "packages/pretty"
   },
   "bugs": {
     "url": "https://github.com/CorentinTh/crowlog/issues"
   },
   "keywords": [
+    "crowlog",
     "logger",
     "logging",
-    "typescript",
-    "nodejs",
-    "browser",
-    "edge",
-    "async",
-    "context",
-    "plugin",
-    "transport",
-    "pretty"
+    "pretty",
+    "formatter",
+    "cli",
+    "development",
+    "colors",
+    "human-readable",
+    "json-logs",
+    "pino-pretty-alternative"
   ],
   "exports": {
     ".": "./dist/index.js",

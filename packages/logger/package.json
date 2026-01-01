@@ -2,13 +2,15 @@
   "name": "@crowlog/logger",
   "type": "module",
   "version": "2.2.0",
-  "description": "Crowlog logger.",
+  "description": "Ultra lightweight, zero-dependency, extendable logging library for any JavaScript environment. Works in Node.js, browsers, and edge runtimes.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
-  "homepage": "https://github.com/CorentinTh/crowlog/tree/main/packages/logger",
+  "homepage": "https://crowlog.dev",
+  "documentation": "https://crowlog.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CorentinTh/crowlog"
+    "url": "https://github.com/CorentinTh/crowlog",
+    "directory": "packages/logger"
   },
   "bugs": {
     "url": "https://github.com/CorentinTh/crowlog/issues"
@@ -17,13 +19,22 @@
     "logger",
     "logging",
     "typescript",
+    "javascript",
     "nodejs",
     "browser",
     "edge",
+    "cloudflare-workers",
+    "deno",
+    "bun",
+    "lightweight",
+    "zero-dependency",
+    "structured-logging",
     "async",
     "context",
     "plugin",
-    "transport"
+    "transport",
+    "pino-alternative",
+    "winston-alternative"
   ],
   "exports": {
     ".": "./dist/index.js",
