@@ -19,7 +19,7 @@ export default defineConfig({
   },
   description: 'Crowlog is a simple, lightweight, zero-dependency, and extendable logging library that is designed to be used in any project.',
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: '/logo-dark.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo-dark.svg' }],
     ['meta', { name: 'author', content: 'Corentin Thomasset' }],
     ['meta', { name: 'keywords', content: 'logging, logger, javascript, typescript, lightweight, zero-dependency, structured logging, nodejs, browser, edge, cloudflare workers, deno, bun' }],
 
