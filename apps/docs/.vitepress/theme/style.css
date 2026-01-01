@@ -164,7 +164,7 @@
   --vp-c-brand-2: #fff383;
   --vp-c-brand-3: #fff383;
 
-  --vp-button-brand-hover-bg: color-mix(in oklab,var(--vp-c-brand-1)80%,transparent);
+  --vp-button-brand-hover-bg: color-mix(in oklab, var(--vp-c-brand-1) 80%, transparent);
   --vp-button-brand-text: var(--vp-c-bg);
   --vp-button-brand-hover-text: var(--vp-c-bg);
 
