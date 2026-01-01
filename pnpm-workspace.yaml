@@ -1,5 +1,6 @@
 packages:
   - packages/*
+  - apps/*
 
 catalog:
   '@antfu/eslint-config': 6.7.3
@@ -10,4 +11,5 @@ catalog:
   tsdown: 0.15.12
   tsx: 4.21.0
   typescript: 5.9.3
+  vitepress: 2.0.0-alpha.15
   vitest: 4.0.16
