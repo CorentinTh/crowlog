@@ -1,5 +1,11 @@
 # @crowlog/async-context-plugin
 
+## 2.1.1
+
+### Patch Changes
+
+- [#47](https://github.com/CorentinTh/crowlog/pull/47) [`26371bc`](https://github.com/CorentinTh/crowlog/commit/26371bc0626ae890171afa15ec41baee6d987cdb) Thanks [@CorentinTh](https://github.com/CorentinTh)! - Updated package meta
+
 ## 2.1.0
 
 ### Minor Changes

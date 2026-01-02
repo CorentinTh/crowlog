@@ -1,7 +1,7 @@
 {
   "name": "@crowlog/async-context-plugin",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Request-scoped logging context plugin for Crowlog using Node.js AsyncLocalStorage. Perfect for tracking request IDs and user context across async operations.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
