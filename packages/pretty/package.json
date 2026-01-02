@@ -1,7 +1,7 @@
 {
   "name": "@crowlog/pretty",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Pretty formatter for Crowlog JSON logs. Pipe your logs through this CLI for beautiful, colored, human-readable output during development.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",

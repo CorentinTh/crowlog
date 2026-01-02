@@ -1,7 +1,7 @@
 {
   "name": "@crowlog/logger",
   "type": "module",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Ultra lightweight, zero-dependency, extendable logging library for any JavaScript environment. Works in Node.js, browsers, and edge runtimes.",
   "author": "Corentin Thomasset <corentinth@proton.me> (https://corentin.tech)",
   "license": "MIT",
