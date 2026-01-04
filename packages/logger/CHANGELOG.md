@@ -1,5 +1,11 @@
 # @crowlog/logger
 
+## 2.2.2
+
+### Patch Changes
+
+- [#49](https://github.com/CorentinTh/crowlog/pull/49) [`68b0c4f`](https://github.com/CorentinTh/crowlog/commit/68b0c4fa3f2b8efd134b6fafd8d03b272da2aa95) Thanks [@CorentinTh](https://github.com/CorentinTh)! - Use globalThis for process reference in stdout transport for better cloudflare compatibility
+
 ## 2.2.1
 
 ### Patch Changes
